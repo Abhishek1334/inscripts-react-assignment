@@ -13,8 +13,15 @@ function App() {
   const stickyScrollRef = useRef<HTMLDivElement>(null);
   const [sheetWidth, setSheetWidth] = useState<number>(window.innerWidth);
   const [selectedTab, setSelectedTab] = useState<string>('All Orders');
-  const [showModal, setShowModal] = useState(true);
+  const [showModal, setShowModal] = useState(false);
   const timerRef = useRef<number | null>(null);
+
+  // Show modal only once per user (on first visit)
+  useEffect(() => {
+    if (typeof window !== 'undefined' && localStorage.getItem('modalShown') !== 'true') {
+      setShowModal(true);
+    }
+  }, []);
 
   // Move useSheet to App level to prevent state reset
   const sheetState = useSheet();
@@ -36,12 +43,21 @@ function App() {
   // Auto-close modal after 10 seconds
   useEffect(() => {
     if (showModal) {
-      timerRef.current = window.setTimeout(() => setShowModal(false), 10000);
+      timerRef.current = window.setTimeout(() => {
+        setShowModal(false);
+        localStorage.setItem('modalShown', 'true');
+      }, 10000);
     }
     return () => {
       if (timerRef.current) window.clearTimeout(timerRef.current);
     };
   }, [showModal]);
+
+  // When modal is closed manually, set localStorage
+  const handleCloseModal = () => {
+    setShowModal(false);
+    localStorage.setItem('modalShown', 'true');
+  };
 
   // Sync scroll between sheet and sticky scrollbar
   const handleSheetScroll = () => {
@@ -95,7 +111,7 @@ function App() {
       </div>
 
       {/* Modal for welcome message */}
-      <Modal open={showModal} onClose={() => setShowModal(false)}>
+      <Modal open={showModal} onClose={handleCloseModal}>
         <div className="text-gray-800">
           {/* Header */}
           <div className="flex items-center gap-3 mb-4 p-3 rounded-t-xl bg-gradient-to-r from-blue-600 to-blue-400 text-white shadow-sm">
