@@ -4,7 +4,8 @@ A pixel-perfect, interactive spreadsheet UI built for the React Intern Assignmen
 
 ## 🚀 Live Demo
 
-[Live URL here]
+🔗 [View the Live Site](https://inscripts-react-assignment.vercel.app/) | 
+[Github](https://github.com/Abhishek1334) | [Portfolio](https://abhishek-rajoria.vercel.app/) | [Linkedin](https://www.linkedin.com/in/abhishekrajoria/)
 
 ## 🛠 Tech Stack
 - React 18 (Vite)
@@ -26,8 +27,7 @@ A pixel-perfect, interactive spreadsheet UI built for the React Intern Assignmen
 - **Arrow keys**: Move between cells
 - **Tab**: Move right (wraps to next row)
 - **Shift+Tab**: Move left (wraps to previous row)
-- **Enter**: Start editing focused cell
-- **Escape**: Exit editing
+- **Escape**: Exit select
 
 ## 📝 Setup
 ```bash
@@ -50,9 +50,4 @@ npm run dev
 - `src/hooks/useSheet.ts` — Sheet state/logic
 - `src/lib/sheetData.ts` — Data, column config, utils
 
-## 👨‍💻 Author
-- [Your Name]
-
 ---
-
-**Good luck to all applicants!**
